@@ -1,7 +1,16 @@
 // https://dev.to/dillionmegida/how-to-calculate-the-difference-of-days-between-two-dates-in-javascript-chd
+/**
+ * Get's the difference between days. Ignores time completely.
+ * @param start 
+ * @param end 
+ * @returns 
+ */
 export function DateDifference(start: Date, end: Date) {
-    const firstDateInMs = start.getTime();
-    const secondDateInMs = end.getTime();
+    const startStripped = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    const endStripped = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+    const firstDateInMs = startStripped.getTime();
+    const secondDateInMs = endStripped.getTime();
 
     const differenceBtwDates = secondDateInMs - firstDateInMs;
 

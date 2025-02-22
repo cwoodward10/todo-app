@@ -8,7 +8,8 @@
     "sample": "node database/makeJson.js",
     "migrate": "node database/migrate.js",
     "reset": "node database/reset.js",
-    "watch": "node database/watch.js"
+    "watch": "node database/watch.js",
+    "test": "vitest"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@types/node": "^20.11.17",
     "@types/node-schedule": "^2.1.7",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "vitest": "^3.0.6"
   }
 }

@@ -102,7 +102,7 @@ export async function CheckTriggeredRepeatables(today: Date) {
     return newTodos;
 }
 
-function checkRepeatable(repeatable: any, today: Date): boolean {
+export function checkRepeatable(repeatable: any, today: Date): boolean {
     let start;
     let interval: number = repeatable.interval;
     switch (repeatable.type) {
@@ -130,7 +130,7 @@ function checkRepeatable(repeatable: any, today: Date): boolean {
             start = new Date(repeatable.start);
             return (
                 start.getMonth() === today.getMonth() &&
-                start.getDate() === today.getMonth()
+                start.getDate() === today.getDate()
             )
     }
 }
