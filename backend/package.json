@@ -1,0 +1,26 @@
+{
+  "name": "todo-backend",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "types": "node database/makeTypes.js",
+    "sample": "node database/makeJson.js",
+    "migrate": "node database/migrate.js",
+    "reset": "node database/reset.js",
+    "watch": "node database/watch.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "better-sqlite3": "^11.8.1",
+    "flyweight-client": "^1.0.22",
+    "flyweightjs": "^3.0.42",
+    "hono": "^4.7.2",
+    "node-schedule": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@types/node-schedule": "^2.1.7",
+    "tsx": "^4.7.1"
+  }
+}
