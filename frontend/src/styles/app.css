@@ -1,0 +1,24 @@
+@import './reset.css';
+
+:root {
+    --color-red: red;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+
+button:has(svg) {
+    height: 1.5rem;
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+}

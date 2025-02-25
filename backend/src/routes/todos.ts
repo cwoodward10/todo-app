@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 
-import { AddTodos, GetTodos, GetTodoById, UpdateTodo, DeleteTodo } from "../helpers/todos.js";
+import { AddTodos, GetTodos, GetTodoById, UpdateTodo, DeleteTodo, AddTodo } from "../helpers/todos.js";
 
 const todos = new Hono(); 
 
 /**
  * Returns open todos by default. Will return others on query parameter 'type':
- * ex: ?type=all or type=completed
+ * ex: ?type=all or type=completed or type=open
  */
 todos.get('/', async (c) => {
     try {
@@ -22,16 +22,16 @@ todos.get('/', async (c) => {
     }
 }).post(async (c) => {
     try {
-        const data = c.req.json();
-        const todo = await AddTodos(data);
-        return c.json({ todo });
+        const data = await c.req.json();
+        const id = await AddTodo(data);
+        return c.json({ id });
     } catch (e) {
         throw new HTTPException(500, { message: 'Error inserting to-do', cause: e})
     }
 })
 
 todos.get('/:id', async (c) => {
-    const id = c.req.param('id')
+    const id = c.req.param('id');
     try {
         const todo = await GetTodoById(Number.parseInt(id));
         return c.json({ todo });
@@ -42,8 +42,8 @@ todos.get('/:id', async (c) => {
     const id = c.req.param('id');
     try {
         const params = await c.req.json();
-        const todo = UpdateTodo(Number.parseInt(id), params);
-        return c.json({ todo });
+        const updatedId = UpdateTodo(Number.parseInt(id), params);
+        return c.json({ updatedId });
     } catch (e) {
         throw new HTTPException(500, { message: `Error updating to-do ID: ${id}`, cause: e})
     }

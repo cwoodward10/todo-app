@@ -49,10 +49,18 @@ export async function GetTodoByRepeatId(id: number) {
 //#endregion GET
 
 //#region INSERT
-export async function AddTodos(todos: any | any[]) {
+export async function AddTodo(todo: any) {
     try {
-        const toInsert = Array.isArray(todos) ? todos : [ todos ];
-        await db.todos.insertMany(toInsert);
+        console.log('inserting...', todo)
+        const id = await db.todos.insert(todo);
+        return id;
+    } catch (e) {
+        throw new Error('Error inserting to-do(s)', { cause: e });
+    }
+}
+export async function AddTodos(todos: any[]) {
+    try {
+        await db.todos.insertMany(todos);
         return true;
     } catch (e) {
         throw new Error('Error inserting to-do(s)', { cause: e });

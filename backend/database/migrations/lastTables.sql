@@ -1,6 +1,7 @@
 create table repeatable_todos (
     id integer primary key,
     type text not null,
+    start text not null,
     interval integer not null,
     active integer not null default true,
     content text not null

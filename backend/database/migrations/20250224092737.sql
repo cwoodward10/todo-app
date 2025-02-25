@@ -1,8 +1,13 @@
-drop view completed_todos;
-drop view open_todos;
+create table repeatable_todos (
+    id integer primary key,
+    type text not null,
+    start text not null,
+    interval integer not null,
+    active integer not null default 1,
+    content text not null
+) strict;
 
-
-create table todos_new (
+create table todos (
     id integer primary key,
     content text not null,
     category text not null,
@@ -10,27 +15,6 @@ create table todos_new (
     completed text,
     repeatable integer references repeatable_todos
 ) strict;
-
-insert into todos_new (
-    id,
-    content,
-    category,
-    created,
-    completed,
-    repeatable)
-select
-    id,
-    content,
-    category,
-    created,
-    completed,
-    repeatable
-from todos;
-
-drop table todos;
-alter table todos_new rename to todos;
-pragma foreign_key_check;
-
 
 create view completed_todos as
 select 
@@ -49,3 +33,4 @@ select
     created,
     completed,
     repeatable from todos where completed is null;
+
